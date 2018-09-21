@@ -1,0 +1,6 @@
+
+helm install  -f mondodb-helm-chart-values.yaml stable/mongodb
+
+kubectl create -f nodejsapi-deploy.yaml 
+
+kubectl create -f nodejsapi-service.yaml 

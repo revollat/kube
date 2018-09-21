@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  node_api:
+    image : gcr.io/kubengine-216711/node_api:6
+    build: .
+    environment:
+      - PORT=1337
+      - DBHOST=oliv1234
+    ports:
+      - "1337:1337"
+      - "3000:3000"
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - db
+    restart: always
+
+  mongo:
+    image: mongo:3.4.4
+    volumes:
+      - ./data/mongo:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - db
+    restart: always
+
+networks:
+  db:
+    driver: bridge

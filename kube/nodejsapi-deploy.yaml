@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejsapi-deploy
+  labels:
+    app: nodejsapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejsapi
+  template:
+    metadata:
+      labels:
+        app: nodejsapi
+    spec:
+      containers:
+      - name: nodeimg
+        image: gcr.io/kubengine-216711/node_api:6
+        env:
+        - name: DBHOST
+          value: "nonexistent-whippet-mongodb"
+        #- name: PORT
+        #  value: 1337
+        #resources:
+        #  requests:
+        #    cpu: 100m
+        #    memory: 100Mi
+        ports:
+        - containerPort: 1337
